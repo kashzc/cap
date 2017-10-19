@@ -17,6 +17,7 @@ var personajes = require('./routes/personajes');
 var votos = require('./routes/votos');
 var comidas = require('./routes/comidas');
 var top = require('./routes/top');
+var rondas = require('./routes/rondas');
 
 var app = express();
 // view engine setup
@@ -36,8 +37,12 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
 
+<<<<<<< HEAD
 
     //redirect despues de login
+=======
+    //redirect despues de login
+>>>>>>> upstream/master
     if (!req.path.match(/\/login|\/logout/)) {
         console.log("url login o logoyut o /:" + req.path);
         if(!req.path.match(/\/personajes/)){
@@ -65,8 +70,12 @@ app.use('/users', users);
 app.use('/comidas', comidas);
 app.use('/personajes', personajes);
 app.use('/votos', votos);
+<<<<<<< HEAD
 app.use('/top', top);
 
+=======
+app.use('/rondas', rondas);
+>>>>>>> upstream/master
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
