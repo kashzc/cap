@@ -14,7 +14,6 @@ router.get('/admin/ronda/create', ctrl2.createRonda); //muestra vista nueva rond
 router.post('/admin/ronda/create', ctrl2.addRonda); //añade ronda
 router.get('/admin/rondas/json/', ctrl2.getRondasJson); //añade ronda
 
-
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });

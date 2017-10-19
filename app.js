@@ -16,6 +16,7 @@ var users = require('./routes/users');
 var personajes = require('./routes/personajes');
 var votos = require('./routes/votos');
 var comidas = require('./routes/comidas');
+var top = require('./routes/top');
 
 var app = express();
 // view engine setup
@@ -27,8 +28,8 @@ app.use(partials());
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false })); 
-app.use(bodyParser.urlencoded()); //permite pasar objetos desde un form 
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded()); //permite pasar objetos desde un form
 app.use(cookieParser('quiz formacion cap'));
 app.use(session());
 app.use(flash());
@@ -36,16 +37,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
 
 
-    //redirect despues de login    
+    //redirect despues de login
     if (!req.path.match(/\/login|\/logout/)) {
-        console.log("url login o logoyut o /:" + req.path)
-        req.session.redir = req.path;
+        console.log("url login o logoyut o /:" + req.path);
+        if(!req.path.match(/\/personajes/)){
+            req.session.redir = req.path;
+        }else{
+            req.session.redir = "/personajes/templates/login";
+        }
+
     } else {
         console.log("aqui entra")
         //  req.session.redir = "/";
     }
 
-    
+
     console.log("nos iremos a: ")
     console.log(req.session.redir)
 
@@ -59,6 +65,8 @@ app.use('/users', users);
 app.use('/comidas', comidas);
 app.use('/personajes', personajes);
 app.use('/votos', votos);
+app.use('/top', top);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
